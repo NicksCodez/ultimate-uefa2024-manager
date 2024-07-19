@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class App extends Component {
-  render() {
-    return (
-      <div>
-        <h1>Ultimate UEFA 2024 Manager</h1>
-      </div>
-    );
-  }
-}
+const App = () => {
+  const blahblahstopRefactoring = true;
+
+  return (
+    <div>
+      <h1>Ultimate UEFA 2024 Manager</h1>
+    </div>
+  );
+};
 
 export default App;
