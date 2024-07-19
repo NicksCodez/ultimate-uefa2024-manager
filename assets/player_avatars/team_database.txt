@@ -1,0 +1,14 @@
+team: {name, picture, position, shooting, passing, defence}
+england: {Adam Wharton, adam_wharton.jpg, midfielder, 35, 56, 61}, {Anthony Gordon, anthony_gordon.jpg, attacker, 69, 72, 37}, {Bukayo Saka, bukayo_saka.jpg, attacker, 81, 79, 60}, {Cole Palmer, cole_palmer.jpg, midfielder, 66, 62, 46}, {Conor Gallagher, conor_gallagher.jpg, midfielder, 75, 74, 68},
+	 {Declan Rice, declan_rice.jpg, midfielder, 65, 75, 83}, {Eberechi Eze, eberechi_eze.jpg, attacker, 76, 77, 49}, {Ezri Konsa, ezri_konsa.jpg, defender, 39, 62, 80}, {Harry Kane, harry_kane.jpg, attacker, 93, 84, 49}, {Ivan Toney, ivan_toney.jpg, attacker, 81, 70, 51}, 
+	 {Jarrod Bowen, jarrod_bowen.jpg, attacker, 77, 74, 44}, {John Stones, john_stones.jpg, defender, 52, 75, 85}, {Jordan Pickford, jordan_pickford.jpg, goalkeeper, }
+
+Rodri - Rodrigo Hernández Cascante
+Pedri - Pedro González López
+Joselu - José Luis Mato Sanmartín
+Jorginho - Jorge Luiz Frello Filho
+Zanka - Mathias Jattah Njie Jørgensen
+Pepe - Képler Laveran Lima Ferreira
+Vitinha - Vítor Machado Ferreira
+
+Rodrigo Hernández Cascante, Pedro González López, José Luis Mato Sanmartín, Jorge Luiz Frello Filho, Mathias Jattah Njie Jørgensen, Képler Laveran Lima Ferreira, Vítor Machado Ferreira
