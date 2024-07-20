@@ -1,5 +1,13 @@
 import React from 'react';
 
-const Home = () => <div id="home">Home</div>;
+// components
+import HomeMenu from '../../components/homeMenu/HomeMenu';
+
+const Home = () => (
+  <div id="home">
+    <h1>ULTIMATE EURO 2024 MANAGER</h1>
+    <HomeMenu />
+  </div>
+);
 
 export default Home;
