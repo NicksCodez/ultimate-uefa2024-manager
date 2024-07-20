@@ -1,18 +1,18 @@
 {
-  "name": "team_crests/turkey.png",
+  "name": "team_crests/turkiye.png",
   "bucket": "uefa2024-manager.appspot.com",
   "metageneration": 1,
-  "generation": 1721296880390,
+  "generation": 1721472031920,
   "contentType": "image/png",
   "storageClass": "STANDARD",
   "contentDisposition": "inline",
   "downloadTokens": [
-    "f9da7172-6688-43a2-b424-be2a5196e368"
+    "eac60791-dd63-420b-83d4-d6f9be42fb99"
   ],
-  "etag": "g5uQ+Qq6hofbdOyPoOmUzVReTCM",
+  "etag": "ZFX0NtohL4KUpSohOWnCHxmezbs",
   "customMetadata": {},
-  "timeCreated": "2024-07-18T10:01:20.390Z",
-  "updated": "2024-07-18T10:01:20.390Z",
+  "timeCreated": "2024-07-20T10:40:31.920Z",
+  "updated": "2024-07-20T10:40:31.920Z",
   "size": 7689,
   "md5Hash": "WGBWA7w9aGqfAU34GFI0OA==",
   "crc32c": "4040925615"

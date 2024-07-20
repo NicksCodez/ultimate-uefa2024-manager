@@ -1,18 +1,18 @@
 {
-  "name": "player_avatars/france/eduardo_carmavinga.jpg",
+  "name": "player_avatars/france/eduardo_camavinga.jpg",
   "bucket": "uefa2024-manager.appspot.com",
   "metageneration": 1,
-  "generation": 1721296499829,
+  "generation": 1721474458228,
   "contentType": "image/jpeg",
   "storageClass": "STANDARD",
   "contentDisposition": "inline",
   "downloadTokens": [
-    "14a3dd06-88bb-4171-9697-2980c8bc9bcd"
+    "61751351-39ed-4b6c-892d-3d45993c2ce9"
   ],
-  "etag": "tAMZ5Slbh5271vpwVxpHEftUN0A",
+  "etag": "iVGb/HznXAAnlNKLEtFMJzFAla8",
   "customMetadata": {},
-  "timeCreated": "2024-07-18T09:54:59.830Z",
-  "updated": "2024-07-18T09:54:59.830Z",
+  "timeCreated": "2024-07-20T11:20:58.228Z",
+  "updated": "2024-07-20T11:20:58.228Z",
   "size": 4234,
   "md5Hash": "xU/7JsxpFy69RKzQegPXfQ==",
   "crc32c": "1722773096"

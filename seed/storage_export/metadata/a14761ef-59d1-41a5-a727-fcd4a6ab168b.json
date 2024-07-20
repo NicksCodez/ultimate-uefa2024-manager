@@ -1,18 +1,18 @@
 {
-  "name": "player_avatars/spain/nacho.jpg",
+  "name": "player_avatars/spain/nacho_fernandez.jpg",
   "bucket": "uefa2024-manager.appspot.com",
   "metageneration": 1,
-  "generation": 1721296673971,
+  "generation": 1721473873931,
   "contentType": "image/jpeg",
   "storageClass": "STANDARD",
   "contentDisposition": "inline",
   "downloadTokens": [
-    "ae97825b-bb31-4d75-beb9-16aeeb8d56c7"
+    "36919813-49d5-49a1-9a6b-1e51ab1fc366"
   ],
-  "etag": "cvO0fHkuj1e/Iz9tRk9yLbFOswY",
+  "etag": "5bwrEoNDot93TxXgGMe2coVuHfY",
   "customMetadata": {},
-  "timeCreated": "2024-07-18T09:57:53.971Z",
-  "updated": "2024-07-18T09:57:53.971Z",
+  "timeCreated": "2024-07-20T11:11:13.931Z",
+  "updated": "2024-07-20T11:11:13.931Z",
   "size": 18317,
   "md5Hash": "LzZuRtyPEyc+uaGmxTWB0A==",
   "crc32c": "779886129"
