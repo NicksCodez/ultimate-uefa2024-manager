@@ -1,58 +1,53 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
+
+// firebase
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../firebase';
 
 // components
 import PageHeader from '../../components/homeMenu/pageHeader/PageHeader';
-import LoginInput from '../../components/loginInput/LoginInput';
+import InputField from '../../components/inputField/InputField';
 
 // utils
-import useLoginInput from '../../utils/hooks/loginHooks/UseLoginInput';
+import useInputField from '../../utils/hooks/inputHooks/UseInput';
 
 // context
 import { useAuth } from '../../contexts/authContext/AuthContext';
 
 const Login = () => {
-  const navigate = useNavigate();
-
   const { loggedIn } = useAuth();
 
+  // component state
+  const [loggingIn, setLoggingIn] = useState(false);
+  const [errorLoggingIn, setErrorLoggingIn] = useState(false);
+
+  const navigate = useNavigate();
+  const onBackClick = () => {
+    navigate(-1);
+  };
+
+  // forms
   const {
     value: emailValue,
     onChange: emailOnChange,
     onFocus: emailOnFocus,
     onBlur: emailOnBlur,
-  } = useLoginInput('');
+  } = useInputField();
 
   const {
     value: passwordValue,
     onChange: passwordOnChange,
     onFocus: passwordOnFocus,
     onBlur: passwordOnBlur,
-  } = useLoginInput('');
-
-  const onBackClick = () => {
-    navigate(-1);
-  };
-
-  const handleLogIn = (e) => {
-    e.preventDefault();
-    console.log('logging in');
-  };
-
-  useEffect(() => {
-    console.log({ emailValue });
-  }, [emailValue]);
-
-  useEffect(() => {
-    console.log({ passwordValue });
-  }, [passwordValue]);
+  } = useInputField('');
 
   return (
     <div id="login">
       {loggedIn && <Navigate to="/home" replace />}
       <PageHeader title="Login" onBackClick={onBackClick} />
       <form>
-        <LoginInput
+        <InputField
           id="emailInput"
           type="email"
           name="email"
@@ -62,7 +57,7 @@ const Login = () => {
           onFocus={emailOnFocus}
           onBlur={emailOnBlur}
         />
-        <LoginInput
+        <InputField
           id="passwordInput"
           type="password"
           name="password"
@@ -72,7 +67,12 @@ const Login = () => {
           onFocus={passwordOnFocus}
           onBlur={passwordOnBlur}
         />
-        <button type="submit" onClick={(e) => handleLogIn(e)}>
+        <button
+          type="submit"
+          onClick={(e) =>
+            handleLogin(e, emailValue, passwordValue, setLoggingIn, navigate)
+          }
+        >
           Log In
         </button>
       </form>
@@ -80,8 +80,23 @@ const Login = () => {
       <p className="no-account">
         Don&apos;t have an account? <a href="/signup">Sign up!</a>
       </p>
+      {loggingIn && <div>Logging in</div>}
     </div>
   );
 };
 
 export default Login;
+
+const handleLogin = async (e, email, password, setLoggingIn, navigate) => {
+  e.preventDefault();
+  setLoggingIn(true);
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+    navigate('/home');
+  } catch (error) {
+    console.error(
+      `Error logging in user ${email} with password ${password}:`,
+      error,
+    );
+  }
+};

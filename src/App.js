@@ -16,9 +16,12 @@ import About from './pages/about/About';
 import Login from './pages/login/Login';
 import SignUp from './pages/signup/SignUp';
 import Profile from './pages/profile/Profile';
+import LogOut from './pages/logout/Logout';
 
 // layouts
 import RootLayout from './layouts/rootLayout/RootLayout';
+
+// context
 import { AuthProvider } from './contexts/authContext/AuthContext';
 
 const App = () => {
@@ -34,6 +37,7 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="logout" element={<LogOut />} />
         </Route>
       </Route>,
     ),

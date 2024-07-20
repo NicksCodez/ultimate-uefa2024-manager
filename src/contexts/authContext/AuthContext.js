@@ -1,4 +1,3 @@
-import { onAuthStateChanged } from 'firebase/auth';
 import React, {
   createContext,
   useContext,
@@ -6,6 +5,9 @@ import React, {
   useMemo,
   useState,
 } from 'react';
+
+// firebase
+import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../../firebase';
 
 const AuthContext = createContext();
@@ -40,7 +42,7 @@ const AuthProvider = ({ children }) => {
       loggedIn,
       setCurrentUser,
     }),
-    [],
+    [currentUser, loggedIn, setCurrentUser],
   );
 
   return (

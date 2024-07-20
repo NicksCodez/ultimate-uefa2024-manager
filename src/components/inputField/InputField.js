@@ -1,9 +1,9 @@
 import React from 'react';
 
 // css
-import './LoginInput.css';
+import './InputField.css';
 
-const LoginInput = ({
+const InputField = ({
   id,
   type,
   name,
@@ -12,16 +12,17 @@ const LoginInput = ({
   onChange,
   onFocus,
   onBlur,
-  required = true,
+  error,
+  validate,
 }) => (
-  <div className="login-input">
+  <div className="input-field">
     <label htmlFor={id}>
       <div className="input-placeholder">
         <span>{label}</span>
       </div>
       <div className="input-wrapper">
         <input
-          required={required}
+          required
           type={type}
           id={id}
           name={name}
@@ -32,7 +33,12 @@ const LoginInput = ({
         />
       </div>
     </label>
+    {validate && error && (
+      <div className={`error ${error ? 'active' : ''}`}>
+        <span>{error}</span>
+      </div>
+    )}
   </div>
 );
 
-export default LoginInput;
+export default InputField;

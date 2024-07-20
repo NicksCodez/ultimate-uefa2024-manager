@@ -23,6 +23,7 @@
   --clr-font-on-blue-bg: rgb(255, 255, 255);
   --clr-font-following: rgb(15, 20, 25);
   --clr-font-follow: rgb(255, 255, 255);
+  --clr-error: rgb(244, 33, 46);
 
   /* border colors */
   --clr-border-primary: rgb(239, 243, 244);
