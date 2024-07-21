@@ -25,6 +25,9 @@ import { getStorageUrl } from '../../utils/firebase/firebaseFunctions';
 // context
 import { useAuth } from '../../contexts/authContext/AuthContext';
 
+// css
+import './SignUp.css';
+
 const SignUp = () => {
   const navigate = useNavigate();
   const onBackClick = () => {
@@ -160,7 +163,7 @@ const SignUp = () => {
           <div className="image-upload">
             <label htmlFor="profilePicture">
               <div className="image-placeholder">
-                <span>Profile Picture</span>
+                <span>Choose a profile picture</span>
               </div>
               <input
                 type="file"
@@ -176,6 +179,7 @@ const SignUp = () => {
           </div>
           <button
             type="submit"
+            className="authentication-button"
             onClick={(e) =>
               handleUserCreate(
                 e,
@@ -193,11 +197,11 @@ const SignUp = () => {
               )
             }
           >
-            Submit
+            Sign up
           </button>
         </form>
-        {creatingAccount && <div>Am creating account</div>}
       </div>
+      {creatingAccount && <div>Am creating account</div>}
     </div>
   );
 };
