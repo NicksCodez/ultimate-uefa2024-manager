@@ -1,0 +1,19 @@
+#player-list {
+  height: calc(100vh - 54px);
+  width: calc(100vw - 48px);
+  position: absolute;
+  top: 0px;
+  left: 100%;
+  overflow-y: scroll;
+  background-color: var(--clr-bg-primary);
+  transition: all 0.3s ease-in-out;
+  padding: 0px 24px;
+}
+
+#player-list.active {
+  left: 0px;
+}
+
+#player-list h3 {
+  font-size: 24px;
+}

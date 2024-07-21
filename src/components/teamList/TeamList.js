@@ -4,7 +4,15 @@ import { useNavigate } from 'react-router-dom';
 // firebase
 import { collection, getDocs, query } from 'firebase/firestore';
 import { firestore } from '../../firebase';
+
+// components
 import PlayerList from '../playerList/PlayerList';
+
+// utils
+import { capitalizeFirstLetters } from '../../utils/stringFunctions/StringFunctions';
+
+// css
+import './TeamList.css';
 
 const TeamList = () => {
   // states
@@ -31,6 +39,8 @@ const TeamList = () => {
   const onTeamClick = (team) => {
     event.stopPropagation();
     setPlayers(team.players);
+    const playerListDiv = document.getElementById('player-list');
+    playerListDiv.classList.add('active');
   };
 
   return (
@@ -41,7 +51,7 @@ const TeamList = () => {
             <li key={team.name}>
               <button type="button" onClick={() => onTeamClick(team)}>
                 <img src={team.picture} alt="team-crest" />
-                <span>{team.name}</span>
+                <span>{capitalizeFirstLetters(team.name)}</span>
               </button>
             </li>
           ))}

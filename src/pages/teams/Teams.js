@@ -5,11 +5,19 @@ import { useNavigate } from 'react-router-dom';
 import PageHeader from '../../components/homeMenu/pageHeader/PageHeader';
 import TeamList from '../../components/teamList/TeamList';
 
+// css
+import './Teams.css';
+
 const Teams = () => {
   const navigate = useNavigate();
 
   const onBackClick = () => {
-    navigate(-1);
+    const playerListDiv = document.getElementById('player-list');
+    if (playerListDiv.classList.contains('active')) {
+      playerListDiv.classList.remove('active');
+    } else {
+      navigate(-1);
+    }
   };
 
   return (

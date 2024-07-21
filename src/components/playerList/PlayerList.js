@@ -6,6 +6,8 @@ import PlayerCard from '../playerCard/PlayerCard';
 // utils
 import { capitalizeFirstLetters } from '../../utils/stringFunctions/StringFunctions';
 
+import './PlayerList.css';
+
 const PlayerList = ({ players, firstPosition }) => {
   // sort players alphabetically without mutating original string
   const sortedPlayers = players

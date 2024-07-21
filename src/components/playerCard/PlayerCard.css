@@ -1,0 +1,35 @@
+.player-card {
+  display: flex;
+}
+
+.player-card .player-card-left {
+  border-right: 2px solid var(--clr-bg-primary);
+}
+
+.player-card .player-card-left img {
+  width: 60px;
+  border-radius: 9999px;
+  margin-right: 12px;
+}
+
+.player-card .player-card-right {
+  flex-grow: 1;
+}
+
+.player-card .player-card-right .player-name {
+  font-size: 24px;
+  border-bottom: 2px solid var(--clr-bg-primary);
+  padding-left: 8px;
+}
+
+.player-card .player-stats {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+  padding-left: 8px;
+}
+
+.player-card .category,
+.player-card .score {
+  font-size: 15px;
+}
