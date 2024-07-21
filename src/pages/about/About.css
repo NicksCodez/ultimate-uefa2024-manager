@@ -1,0 +1,8 @@
+#about .about-content {
+  padding: 0px 24px;
+}
+
+#about .about-content p a {
+  display: inline;
+  color: var(--clr-link-blue);
+}

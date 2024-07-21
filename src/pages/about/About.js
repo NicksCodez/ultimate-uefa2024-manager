@@ -4,6 +4,9 @@ import { useNavigate } from 'react-router-dom';
 // components
 import PageHeader from '../../components/homeMenu/pageHeader/PageHeader';
 
+// css
+import './About.css';
+
 const About = () => {
   const navigate = useNavigate();
 
@@ -29,12 +32,48 @@ const About = () => {
           <h3>Disclaimer</h3>
           <p>
             I do not own any copyright to team or player names or pictures. The
-            team pictures were downloaded from{' '}
-            <a href="https://en.wikipedia.org/wiki/Main_Page">Wikipedia</a> and
-            the player pictures from{' '}
-            <a href="https://www.uefa.com/">the official UEFA website</a>. As
-            for the player scores, I used{' '}
-            <a href="https://www.futbin.com/">EA FC 24 cards</a> as inspiration.
+            team pictures were downloaded from&nbsp;
+            <a
+              href="https://en.wikipedia.org/wiki/Main_Page"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Wikipedia
+            </a>
+            &nbsp;and the player pictures from&nbsp;
+            <a
+              href="https://www.uefa.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              the official UEFA website
+            </a>
+            . As for the player scores, I used&nbsp;
+            <a
+              href="https://www.futbin.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              EA FC 24 cards
+            </a>
+            &nbsp;as inspiration. To avoid boring manual data entry, I found two
+            helpful datasets on Kaggle &#40;
+            <a
+              href="https://www.kaggle.com/datasets/damirdizdarevic/uefa-euro-2024-players"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              one
+            </a>
+            &nbsp;and&nbsp;
+            <a
+              href="https://www.kaggle.com/datasets/stefanoleone992/ea-sports-fc-24-complete-player-dataset"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              two
+            </a>
+            &#41;.
           </p>
         </section>
       </div>
