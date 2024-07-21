@@ -1,11 +1,11 @@
 :root {
   --clr-bg-primary: #121212;
   --clr-bg-secondary: #333333;
-  --clr-bg-hover: #ffffff;
+  --clr-bg-hover: rgb(231, 233, 234);
 
   /* font colors */
-  --clr-font-primary: #ffffff;
-  --clr-font-secondary: #000000;
+  --clr-font-primary: rgb(231, 233, 234);
+  --clr-font-secondary: rgb(15, 20, 25);
 
   /* border colors */
 
@@ -67,4 +67,15 @@ h1 {
 
 h2 {
   font-size: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  margin: 0;
+  padding: 0;
+  background: inherit;
+  border: none;
+  outline: inherit;
+  color: inherit;
 }

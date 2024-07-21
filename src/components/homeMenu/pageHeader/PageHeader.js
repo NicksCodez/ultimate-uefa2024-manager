@@ -3,6 +3,9 @@ import React from 'react';
 // components
 import BackArrowIcon from '../../backArrowIcon/BackArrowIcon';
 
+// css
+import './PageHeader.css';
+
 const PageHeader = ({
   title,
   onBackClick,
@@ -10,13 +13,13 @@ const PageHeader = ({
   backButtonText,
   backButtonIcon,
 }) => (
-  <header>
-    <button onClick={onBackClick} type="button">
-      <span className="icon">{backButtonIcon || <BackArrowIcon />}</span>
+  <header id="page-header">
+    <button onClick={onBackClick} type="button" className="left">
+      <div className="icon">{backButtonIcon || <BackArrowIcon />}</div>
       {backButtonText}
     </button>
     <h2>{title}</h2>
-    {rightElement}
+    {rightElement || <div className="min-w" />}
   </header>
 );
 

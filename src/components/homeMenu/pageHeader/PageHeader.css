@@ -1,0 +1,28 @@
+#page-header {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--clr-bg-secondary);
+}
+
+#page-header button.left {
+  margin-left: 12px;
+  display: flex;
+  height: 53px;
+}
+
+#page-header .icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#page-header button.left svg {
+  width: 24px;
+  height: 24px;
+}
+
+#page-header h2 {
+  display: flex;
+  flex-grow: 1;
+  margin-left: 12px;
+}
