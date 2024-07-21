@@ -13,7 +13,34 @@ service cloud.firestore {
     // all client requests to your Firestore database will be denied until you Update
     // your rules
     match /{document=**} {
-      allow read, write: if request.time < timestamp.date(2024, 8, 16);
+      allow read, write: if false;
+    }
+
+    // Teams collection and its subcollections
+    match /teams/{document=**} {
+      allow read: if true;
+      allow write: if false;
+    }
+    
+    // User emails collection
+    match /user_emails/{email} {
+      allow read: if true;
+      allow create: if request.auth != null;
+      allow update, delete: if request.auth != null && request.auth.uid == resource.data.uid;
+    }
+    
+    // User usernames collection
+    match /user_usernames/{username} {
+      allow read: if true;
+      allow create: if request.auth != null;
+      allow update, delete: if request.auth != null && request.auth.uid == resource.data.uid;
+    }
+    
+    // Users collection
+    match /users/{userId} {
+      allow read: if true;
+      allow create: if request.auth != null && request.auth.uid == userId;
+      allow update, delete: if request.auth != null && request.auth.uid == userId;
     }
   }
 }
