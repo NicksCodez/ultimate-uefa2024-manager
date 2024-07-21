@@ -42,5 +42,28 @@ service cloud.firestore {
       allow create: if request.auth != null && request.auth.uid == userId;
       allow update, delete: if request.auth != null && request.auth.uid == userId;
     }
+
+    match /games/{gameId} {
+      // Allow read if the user is authenticated and the userId field matches their UID
+      allow read: if request.auth != null && request.auth.uid == resource.data.userId;
+      
+      // Allow create if the user is authenticated and they're setting their own UID
+      allow create: if request.auth != null 
+                    && request.resource.data.userId == request.auth.uid
+                    && request.resource.data.stage == 'team_selection'
+                    && request.resource.data.createdAt == request.time
+                    && request.resource.data.ended == false
+                    && request.resource.data.won == false
+                    && request.resource.data.lost == false
+                    && request.resource.data.round == 1;
+      
+      // Allow update if the user is authenticated and they're not changing the userId
+      allow update: if request.auth != null 
+                    && request.auth.uid == resource.data.userId
+                    && request.resource.data.userId == resource.data.userId;
+      
+      // Allow delete if the user owns the document
+      allow delete: if request.auth != null && request.auth.uid == resource.data.userId;
+    }
   }
 }

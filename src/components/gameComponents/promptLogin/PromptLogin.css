@@ -1,0 +1,17 @@
+#login-prompt {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+#login-prompt p {
+  text-align: justify;
+  font-size: 18px;
+}
+
+#login-prompt .buttons {
+  display: flex;
+  gap: 14px;
+}
