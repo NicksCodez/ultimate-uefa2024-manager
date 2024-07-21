@@ -1,0 +1,13 @@
+#logout {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+#logout-main {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

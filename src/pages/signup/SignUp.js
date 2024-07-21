@@ -163,7 +163,7 @@ const SignUp = () => {
           <div className="image-upload">
             <label htmlFor="profilePicture">
               <div className="image-placeholder">
-                <span>Choose a profile picture</span>
+                <span>Choose a profile picture:</span>
               </div>
               <input
                 type="file"

@@ -7,6 +7,12 @@ import { auth } from '../../firebase';
 // context
 import { useAuth } from '../../contexts/authContext/AuthContext';
 
+// components
+import PageHeader from '../../components/homeMenu/pageHeader/PageHeader';
+
+// css
+import './Logout.css';
+
 const LogOut = () => {
   const { loggedIn } = useAuth();
   const navigate = useNavigate();
@@ -30,12 +36,20 @@ const LogOut = () => {
   return (
     <div id="logout">
       {!loggedIn && <Navigate to="/home" replace />}
-      <p>
-        So you want to log out, huh? No worries, You can always come back to us!
-      </p>
-      <button type="button" onClick={(e) => handleLogOut(e)}>
-        Log out
-      </button>
+      <PageHeader title="Log Out" />
+      <div id="logout-main">
+        <p>
+          So you want to log out, huh? No worries, you can always come back to
+          us!
+        </p>
+        <button
+          type="button"
+          className="authentication-button"
+          onClick={(e) => handleLogOut(e)}
+        >
+          Log out
+        </button>
+      </div>
       {loggingOut && <div>Am logging out</div>}
     </div>
   );
