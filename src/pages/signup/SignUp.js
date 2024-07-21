@@ -4,7 +4,8 @@ import { Navigate, useNavigate } from 'react-router-dom';
 // firebase
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { doc, runTransaction } from 'firebase/firestore';
-import { auth, firestore } from '../../firebase';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import { auth, firestore, storage } from '../../firebase';
 
 // components
 import PageHeader from '../../components/homeMenu/pageHeader/PageHeader';
@@ -19,6 +20,7 @@ import {
   validateUsername,
 } from '../../utils/dataValidation/formValidation';
 import useInputField from '../../utils/hooks/inputHooks/UseInput';
+import { getStorageUrl } from '../../utils/firebase/firebaseFunctions';
 
 // context
 import { useAuth } from '../../contexts/authContext/AuthContext';
@@ -32,6 +34,8 @@ const SignUp = () => {
   // component state
   const [creatingAccount, setCreatingAccount] = useState(false);
   const [errorCreatingAccount, setErrorCreatingAccount] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [imageError, setImageError] = useState('');
 
   // user logged in or not
   const { loggedIn } = useAuth();
@@ -153,6 +157,23 @@ const SignUp = () => {
             onBlur={handlePasswordConfirmBlur}
             validate
           />
+          <div className="image-upload">
+            <label htmlFor="profilePicture">
+              <div className="image-placeholder">
+                <span>Profile Picture</span>
+              </div>
+              <input
+                type="file"
+                id="profilePicture"
+                name="profilePicture"
+                accept=".jpg,.jpeg,.png,.gif"
+                onChange={(e) =>
+                  handleImageChange(e, setSelectedImage, setImageError)
+                }
+              />
+            </label>
+            {imageError && <p className="error">{imageError}</p>}
+          </div>
           <button
             type="submit"
             onClick={(e) =>
@@ -162,13 +183,13 @@ const SignUp = () => {
                 usernameValue,
                 emailValue,
                 passwordValue,
+                selectedImage,
                 isNameValid,
                 isUsernameValid,
                 isEmailValid,
                 isPasswordValid,
                 isPasswordConfirmValid,
                 setCreatingAccount,
-                navigate,
               )
             }
           >
@@ -183,19 +204,42 @@ const SignUp = () => {
 
 export default SignUp;
 
+const handleImageChange = (e, setSelectedImage, setImageError) => {
+  const file = e.target.files[0];
+  if (file) {
+    // make sure picture is valid type and size before setting it, otherwise show error
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+    const maxSize = 5 * 1024 * 1024; // 5MB
+
+    if (!allowedTypes.includes(file.type)) {
+      setImageError('Image should be of type JPEG, PNG or GIF');
+      setSelectedImage(null);
+    } else if (file.size > maxSize) {
+      setImageError('Image size should be less than 5MB.');
+      setSelectedImage(null);
+    } else {
+      setSelectedImage(file);
+      setImageError('');
+    }
+  } else {
+    setSelectedImage(null);
+    setImageError('');
+  }
+};
+
 const handleUserCreate = async (
   e,
   nameValue,
   usernameValue,
   emailValue,
   passwordValue,
+  selectedImage,
   isNameValid,
   isUsernameValid,
   isEmailValid,
   isPasswordValid,
   isPasswordConfirmValid,
   setCreatingAccount,
-  navigate,
 ) => {
   e.preventDefault();
   setCreatingAccount(true);
@@ -215,54 +259,80 @@ const handleUserCreate = async (
       );
       const { uid } = userCredential.user;
 
+      // upload image to firebase storage or select default user profile
+      let profilePicUrl = getStorageUrl('defaults/default_profile.png');
+      if (selectedImage) {
+        const imageRef = ref(
+          storage,
+          `user_profiles/${uid}/${Date.now()}_${selectedImage.name}`,
+        );
+        await uploadBytes(imageRef, selectedImage);
+        profilePicUrl = await getDownloadURL(imageRef);
+      }
+
       // create user, user email and user username documents
-      await runTransaction(firestore, async (transaction) => {
-        const userRef = doc(firestore, 'users', uid);
-        const emailRef = doc(
-          firestore,
-          'user_emails',
-          emailValue.toLowerCase(),
-        );
-        const usernameRef = doc(
-          firestore,
-          'user_usernames',
-          usernameValue.toLowerCase(),
-        );
+      try {
+        await runTransaction(firestore, async (transaction) => {
+          const userRef = doc(firestore, 'users', uid);
+          const emailRef = doc(
+            firestore,
+            'user_emails',
+            emailValue.toLowerCase(),
+          );
+          const usernameRef = doc(
+            firestore,
+            'user_usernames',
+            usernameValue.toLowerCase(),
+          );
 
-        // make sure documents do not already exist
+          // make sure documents do not already exist
 
-        const emailDoc = await transaction.get(emailRef);
-        const usernameDoc = await transaction.get(usernameRef);
-        const userDoc = await transaction.get(userRef);
+          const emailDoc = await transaction.get(emailRef);
+          const usernameDoc = await transaction.get(usernameRef);
+          const userDoc = await transaction.get(userRef);
 
-        if (emailDoc.exists()) {
-          throw new Error('Email already in use');
-        }
+          if (emailDoc.exists()) {
+            throw new Error('Email already in use');
+          }
 
-        if (usernameDoc.exists()) {
-          throw new Error('Username already in use');
-        }
+          if (usernameDoc.exists()) {
+            throw new Error('Username already in use');
+          }
 
-        if (userDoc.exists()) {
-          throw new Error('User document already in use');
-        }
+          if (userDoc.exists()) {
+            throw new Error('User document already in use');
+          }
 
-        // set documents
-        transaction.set(emailRef, { uid });
-        transaction.set(usernameRef, { uid });
-        transaction.set(userRef, {
-          email: emailValue.toLowerCase(),
-          username: usernameValue,
-          usernameLowercase: usernameValue.toLowerCase(),
-          name: nameValue,
-          nameLowercase: nameValue.toLowerCase(),
+          // set documents
+          transaction.set(emailRef, { uid });
+          transaction.set(usernameRef, { uid });
+          transaction.set(userRef, {
+            email: emailValue.toLowerCase(),
+            username: usernameValue,
+            usernameLowercase: usernameValue.toLowerCase(),
+            name: nameValue,
+            nameLowercase: nameValue.toLowerCase(),
+            profilePicUrl,
+          });
         });
-      });
+
+        // creation completed succesfully, redirect to home and log in happen automatically
+        setCreatingAccount(false);
+      } catch (transactionError) {
+        console.error('transaction failed: ', transactionError);
+
+        // delete user if transaction fails
+        await auth.currentUser.delete();
+        setCreatingAccount(false);
+        throw transactionError;
+      }
     } catch (error) {
       console.error('Error creating user: ', error);
+
+      // delete user if transaction fails
+      await auth.currentUser.delete();
+
+      setCreatingAccount(false);
     }
   }
-
-  setCreatingAccount(false);
-  navigate('/login');
 };
