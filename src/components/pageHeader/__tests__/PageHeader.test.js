@@ -5,7 +5,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import PageHeader from '../PageHeader';
 
 jest.mock(
-  '../../../backArrowIcon/BackArrowIcon',
+  '../../backArrowIcon/BackArrowIcon',
   () =>
     function () {
       return <div data-testid="mock-back-arrow">MockBackArrow</div>;
