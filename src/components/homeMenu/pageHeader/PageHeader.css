@@ -6,8 +6,10 @@
 
 #page-header button.left {
   margin-left: 12px;
-  display: flex;
   height: 53px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 #page-header .icon {
