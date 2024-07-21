@@ -1,0 +1,30 @@
+#login {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+#login .form-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 36px;
+  align-items: center;
+  justify-content: center;
+}
+
+#login .form-wrapper form {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  gap: 12px;
+}
+
+#login .form-wrapper form button {
+  align-self: center;
+}
+
+#login .form-wrapper p a {
+  display: inline;
+  color: var(--clr-link-blue);
+}

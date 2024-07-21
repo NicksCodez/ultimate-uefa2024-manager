@@ -16,6 +16,12 @@
   --fs-h2: 20px;
 
   /* line heights */
+
+  /* input variables */
+  --clr-bg-input: rgb(51, 54, 57);
+  --clr-bg-blue: rgb(29, 155, 240);
+  --clr-font-input: rgb(83, 100, 113);
+  --clr-error: rgb(244, 33, 46);
 }
 
 body {
@@ -69,4 +75,19 @@ button {
   border: none;
   outline: inherit;
   color: inherit;
+}
+
+.authentication-button {
+  padding: 12px 12px;
+  background-color: var(--clr-bg-secondary);
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.authentication-button:hover {
+  background-color: var(--clr-bg-hover);
+  color: var(--clr-font-secondary);
 }

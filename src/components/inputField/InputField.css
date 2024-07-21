@@ -3,7 +3,7 @@
 }
 
 .input-field label {
-  border: 1px solid var(--clr-bg-profile-header-pic);
+  border: 1px solid var(--clr-bg-input);
   display: flex;
   border-radius: 4px;
   position: relative;
@@ -34,7 +34,7 @@
 }
 
 .input-field .input-placeholder {
-  color: var(--clr-font-secondary);
+  color: var(--clr-font-input);
   padding: 16px 8px 0px;
   line-height: 24px;
   font-size: 17px;
@@ -59,7 +59,7 @@
 }
 
 .input-field .input-placeholder.active.no-color {
-  color: var(--clr-font-secondary);
+  color: var(--clr-font-input);
 }
 
 .input-field .error {
