@@ -1,0 +1,13 @@
+#home {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  align-items: stretch;
+  gap: 120px;
+  padding: 0px 24px;
+}
+
+#home h1 {
+  margin-top: 80px;
+  text-align: center;
+}

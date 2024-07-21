@@ -1,0 +1,27 @@
+#home-menu li {
+  margin-top: 14px;
+  border-radius: 6px;
+  text-align: center;
+  background-color: var(--clr-bg-secondary);
+}
+
+#home-menu li,
+a {
+  transition: all 0.3s ease;
+}
+
+#home-menu li:hover {
+  background-color: var(--clr-bg-hover);
+  color: var(--clr-font-secondary);
+}
+
+#home-menu li:hover a {
+  padding: 12px 0px;
+  font-size: 20px;
+}
+
+#home-menu a {
+  padding: 8px 0px;
+  font-size: 18px;
+  font-weight: 800;
+}

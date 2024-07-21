@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom';
 // context
 import { useAuth } from '../../contexts/authContext/AuthContext';
 
+// css
+import './HomeMenu.css';
+
 const HomeMenu = () => {
   const { loggedIn } = useAuth();
 

@@ -27,24 +27,23 @@ import { AuthProvider } from './contexts/authContext/AuthContext';
 const App = () => {
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route errorElement={<NotFound />}>
-        <Route path="/" element={<RootLayout />} exact>
-          <Route index element={<Navigate to="/home" replace />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/game" element={<Game />} />
-          <Route path="/teams" element={<Teams />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="logout" element={<LogOut />} />
-        </Route>
+      <Route path="/" element={<RootLayout />} errorElement={<NotFound />}>
+        <Route index element={<Navigate to="/home" replace />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/game" element={<Game />} />
+        <Route path="/teams" element={<Teams />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/logout" element={<LogOut />} />
+        <Route path="*" element={<NotFound />} />
       </Route>,
     ),
   );
 
   return (
-    <div>
+    <div id="app">
       <AuthProvider>
         <RouterProvider router={router} />
       </AuthProvider>
