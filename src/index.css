@@ -38,6 +38,8 @@ body {
 
 #main {
   height: 100%;
+  max-width: 615px;
+  margin: auto;
 }
 
 ol,
