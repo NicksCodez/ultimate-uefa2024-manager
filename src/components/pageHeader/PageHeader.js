@@ -1,7 +1,7 @@
 import React from 'react';
 
 // components
-import BackArrowIcon from '../../backArrowIcon/BackArrowIcon';
+import BackArrowIcon from '../backArrowIcon/BackArrowIcon';
 
 // css
 import './PageHeader.css';

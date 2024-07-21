@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 // components
-import PageHeader from '../../components/homeMenu/pageHeader/PageHeader';
+import PageHeader from '../../components/pageHeader/PageHeader';
 
 // css
 import './About.css';

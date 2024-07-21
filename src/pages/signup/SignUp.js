@@ -8,7 +8,7 @@ import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { auth, firestore, storage } from '../../firebase';
 
 // components
-import PageHeader from '../../components/homeMenu/pageHeader/PageHeader';
+import PageHeader from '../../components/pageHeader/PageHeader';
 import InputField from '../../components/inputField/InputField';
 
 // utils

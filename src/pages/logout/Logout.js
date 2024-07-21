@@ -8,7 +8,7 @@ import { auth } from '../../firebase';
 import { useAuth } from '../../contexts/authContext/AuthContext';
 
 // components
-import PageHeader from '../../components/homeMenu/pageHeader/PageHeader';
+import PageHeader from '../../components/pageHeader/PageHeader';
 
 // css
 import './Logout.css';

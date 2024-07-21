@@ -6,7 +6,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../firebase';
 
 // components
-import PageHeader from '../../components/homeMenu/pageHeader/PageHeader';
+import PageHeader from '../../components/pageHeader/PageHeader';
 import InputField from '../../components/inputField/InputField';
 
 // utils
