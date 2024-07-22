@@ -2,6 +2,8 @@
   display: flex;
   align-items: center;
   border-bottom: 1px solid var(--clr-bg-secondary);
+  min-height: 53px;
+  max-height: 53px;
 }
 
 #page-header button.left {
@@ -10,6 +12,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+#page-header button.general-button {
+  height: auto;
 }
 
 #page-header .icon {

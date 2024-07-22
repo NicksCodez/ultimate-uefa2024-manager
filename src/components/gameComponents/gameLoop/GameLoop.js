@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 
 // firebase
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
+import { firestore } from '../../../firebase';
+
+// utils
 import {
   loadGameState,
   saveGameState,
@@ -9,7 +12,13 @@ import {
 
 // context
 import { useAuth } from '../../../contexts/authContext/AuthContext';
-import { firestore } from '../../../firebase';
+
+// components
+import TeamSelection from '../teamSelection/TeamSelection';
+import PlayerSelection from '../playerSelection/PlayerSelection';
+
+// css
+import('./GameLoop.css');
 
 const GameLoop = ({ gameId = null }) => {
   const [gameState, setGameState] = useState(null);
@@ -117,10 +126,23 @@ const GameLoop = ({ gameId = null }) => {
 
   const renderCurrentStage = () => {
     switch (gameState?.stage) {
-      // case 'team_selection':
-      //   return <TeamSelection onSelect={(team) => advanceStage({ userTeam: team, stage: 'player_selection' })} />;
-      // case 'player_selection':
-      //   return <PlayerSelection onSelect={(players) => advanceStage({ userPlayers: players, stage: 'match_simulation' })} />;
+      case 'team_selection':
+        return (
+          <TeamSelection
+            onSelect={(team) =>
+              advanceStage({ userTeam: team, stage: 'player_selection' })
+            }
+          />
+        );
+      case 'player_selection':
+        return (
+          <PlayerSelection
+            onSelect={(players) =>
+              advanceStage({ userPlayers: players, stage: 'match_simulation' })
+            }
+            userTeam={gameState.userTeam}
+          />
+        );
       // case 'match_simulation':
       //   return <MatchSimulation onComplete={(results) => advanceStage({ matchResults: results, stage: 'results' })} />;
       // case 'results':

@@ -12,10 +12,18 @@ const PageHeader = ({
   rightElement,
   backButtonText,
   backButtonIcon,
+  backButtonClass,
+  noBackButtonIcon,
 }) => (
   <header id="page-header">
-    <button onClick={onBackClick} type="button" className="left">
-      <div className="icon">{backButtonIcon || <BackArrowIcon />}</div>
+    <button
+      onClick={onBackClick}
+      type="button"
+      className={`left ${backButtonClass}`}
+    >
+      <div className="icon">
+        {!noBackButtonIcon && (backButtonIcon || <BackArrowIcon />)}
+      </div>
       {backButtonText}
     </button>
     <h2>{title}</h2>

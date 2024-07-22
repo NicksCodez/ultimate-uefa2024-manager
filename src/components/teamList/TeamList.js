@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 // firebase
@@ -14,11 +14,14 @@ import { capitalizeFirstLetters } from '../../utils/stringFunctions/StringFuncti
 // css
 import './TeamList.css';
 
-const TeamList = () => {
+const TeamList = ({ setSelectedTeam = () => null }) => {
   // states
   const [loading, setLoading] = useState(true);
   const [teams, setTeams] = useState([]);
   const [players, setPlayers] = useState([]);
+
+  // ref
+  const teamListRef = useRef();
 
   // navigator
   const navigate = useNavigate();
@@ -38,13 +41,17 @@ const TeamList = () => {
 
   const onTeamClick = (team) => {
     event.stopPropagation();
+    if (teamListRef.current) {
+      teamListRef.current.scrollTop = 0;
+    }
     setPlayers(team.players);
     const playerListDiv = document.getElementById('player-list');
     playerListDiv.classList.add('active');
+    setSelectedTeam(team);
   };
 
   return (
-    <div id="team-list">
+    <div id="team-list" ref={teamListRef}>
       {!loading && (
         <ul>
           {teams.map((team) => (
