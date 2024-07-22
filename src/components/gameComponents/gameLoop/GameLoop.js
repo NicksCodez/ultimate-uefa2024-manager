@@ -17,6 +17,8 @@ import { useAuth } from '../../../contexts/authContext/AuthContext';
 import TeamSelection from '../teamSelection/TeamSelection';
 import PlayerSelection from '../playerSelection/PlayerSelection';
 import MatchSimulation from '../matchSimulation/MatchSimulation';
+import ResultsDisplay from '../resultsDisplay/ResultsDisplay';
+import TournamentProgress from '../../tournamentProgress/TournamentProgress';
 
 // css
 import('./GameLoop.css');
@@ -114,7 +116,6 @@ const GameLoop = ({ gameId = null }) => {
   }, [currentUser.uid]);
 
   useEffect(() => {
-    console.log({ gameState });
     if (gameState) {
       try {
         saveGameState(currentGameId, gameState);
@@ -124,9 +125,21 @@ const GameLoop = ({ gameId = null }) => {
     }
   }, [gameState, currentUser.uid]);
 
-  const advanceStage = (newState) => {
-    setGameState({ ...gameState, ...newState });
+  // const advanceStage = (newState) => {
+  //   setGameState({ ...gameState, ...newState });
+  // };
+
+  const advanceStage = (newState, incrementRound = false) => {
+    setGameState((prevState) => ({
+      ...prevState,
+      ...newState,
+      round: incrementRound ? prevState.round + 1 : prevState.round,
+    }));
   };
+
+  useEffect(() => {
+    console.log('in game loop studying gamestate: ', gameState?.userPlayers);
+  }, [gameState?.userPlayers]);
 
   const renderCurrentStage = () => {
     switch (gameState?.stage) {
@@ -167,8 +180,8 @@ const GameLoop = ({ gameId = null }) => {
       case 'match_simulation':
         return (
           <MatchSimulation
-            onComplete={(results) =>
-              advanceStage({ matchResults: results, stage: 'results' })
+            onComplete={(events, score) =>
+              advanceStage({ matchResults: score, events, stage: 'results' })
             }
             playerTeamName={gameState.userTeam.name}
             userPlayers={gameState.userPlayers}
@@ -177,10 +190,28 @@ const GameLoop = ({ gameId = null }) => {
             computerPairings={gameState.computerPairings}
           />
         );
-      // case 'results':
-      //   return <ResultsDisplay results={gameState.matchResults} onContinue={() => advanceStage({ stage: 'tournament_progress' })} />;
-      // case 'tournament_progress':
-      //   return <TournamentProgress progress={gameState.tournamentProgress} onContinue={() => advanceStage({ stage: 'team_selection' })} />;
+      case 'results':
+        return (
+          <ResultsDisplay
+            results={gameState.matchResults}
+            events={gameState.events}
+            playerTeamName={gameState.userTeam.name}
+            userPlayers={gameState.userPlayers}
+            computerTeamName={gameState.computerTeam.name}
+            computerPlayers={gameState.computerPlayers}
+            computerPairings={gameState.computerPairings}
+            onContinue={(tournamentProgress) =>
+              advanceStage({ stage: 'tournament_progress', tournamentProgress })
+            }
+          />
+        );
+      case 'tournament_progress':
+        return (
+          <TournamentProgress
+            progress={gameState.tournamentProgress}
+            onContinue={() => advanceStage({ stage: 'player_selection' })}
+          />
+        );
       default:
         return <div>Loading...</div>;
     }

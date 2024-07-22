@@ -21,7 +21,6 @@ const getStorageUrl = (path) => {
 };
 
 const saveGameState = async (gameId, gameState) => {
-  console.log('in saveGameState => ', { gameId }, { gameState });
   const docRef = doc(firestore, 'games', gameId);
 
   try {

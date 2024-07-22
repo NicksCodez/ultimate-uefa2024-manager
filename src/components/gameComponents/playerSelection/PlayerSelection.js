@@ -6,7 +6,7 @@ import PlayerSelector from '../playerSelector/PlayerSelector';
 
 // utils
 import { capitalizeFirstLetters } from '../../../utils/stringFunctions/StringFunctions';
-import { computerSelectTeam } from '../../../utils/gameLoop/computerSelectTeam';
+import { computerSelectTeam } from '../../../utils/gameLoop/teamFunctions';
 
 // css
 import './PlayerSelection.css';
@@ -32,6 +32,7 @@ const PlayerSelection = ({ onSelect, onBack, userTeam, computerTeams }) => {
     // choose user's opponent
     const randomIndex = Math.floor(Math.random() * computerTeams.length);
     setPlayerOpponent(computerTeams[randomIndex]);
+
     const computedTeam = computerSelectTeam(computerTeams[randomIndex].players);
     setComputerSelectedTeam(computedTeam);
 
@@ -40,16 +41,7 @@ const PlayerSelection = ({ onSelect, onBack, userTeam, computerTeams }) => {
     remainingTeams.splice(randomIndex, 1);
     setComputerPairings(drawTeams(remainingTeams));
     setLoading(false);
-    console.log({ userTeam }, { computerTeams });
   }, []);
-
-  useEffect(
-    () => {
-      console.log({ playerOpponent }, { computerPairings }, { userTeam });
-    },
-    [playerOpponent, computerPairings],
-    { userTeam },
-  );
 
   // page header components and functions
   const rightElement = (

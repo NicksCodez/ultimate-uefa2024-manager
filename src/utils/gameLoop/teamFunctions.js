@@ -1,6 +1,7 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable import/prefer-default-export */
-const computerSelectTeam = (availablePlayers) => {
+const computerSelectTeam = (originalPlayers) => {
+  const availablePlayers = [...originalPlayers];
   const teamFormation = {
     goalkeeper: null,
     leftDefender: null,
@@ -16,22 +17,22 @@ const computerSelectTeam = (availablePlayers) => {
   };
 
   const positionCategories = {
-    goalkeeper: ['Goalkeeper'],
-    leftDefender: ['Defender'],
-    centerLeftDefender: ['Defender'],
-    centerRightDefender: ['Defender'],
-    rightDefender: ['Defender'],
-    leftMidfielder: ['Midfielder'],
-    centerLeftMidfielder: ['Midfielder'],
-    centerRightMidfielder: ['Midfielder'],
-    rightMidfielder: ['Midfielder'],
-    leftForward: ['Attacker'],
-    rightForward: ['Attacker'],
+    goalkeeper: ['goalkeeper'],
+    leftDefender: ['defender'],
+    centerLeftDefender: ['defender'],
+    centerRightDefender: ['defender'],
+    rightDefender: ['defender'],
+    leftMidfielder: ['midfielder'],
+    centerLeftMidfielder: ['midfielder'],
+    centerRightMidfielder: ['midfielder'],
+    rightMidfielder: ['midfielder'],
+    leftForward: ['attacker'],
+    rightForward: ['attacker'],
   };
 
   // Helper function to get the best player for a position
-  const getBestPlayerForPosition = (position, availablePlayers) => {
-    const suitablePlayers = availablePlayers.filter((player) =>
+  const getBestPlayerForPosition = (position, available) => {
+    const suitablePlayers = available.filter((player) =>
       positionCategories[position].includes(player.position),
     );
 
@@ -95,4 +96,56 @@ const computerSelectTeam = (availablePlayers) => {
   return teamFormation;
 };
 
-export { computerSelectTeam };
+const createTeam = (teamFormation, teamName) => {
+  let totalHandicap = 0;
+  const players = [];
+
+  Object.entries(teamFormation).forEach(([position, data]) => {
+    const { player, isOutOfPosition } = data;
+
+    players.push(player);
+
+    if (isOutOfPosition) {
+      totalHandicap++;
+    }
+  });
+
+  return {
+    name: teamName,
+    players,
+    handicap: totalHandicap,
+  };
+};
+
+const getMatchWinner = (matchResult) => {
+  const { score } = matchResult;
+  const teamNames = Object.keys(score).filter((key) => key !== 'penalties');
+
+  if (teamNames.length !== 2) {
+    throw new Error('Expected exactly two teams');
+  }
+
+  const [team1, team2] = teamNames;
+  const team1Score = score[team1];
+  const team2Score = score[team2];
+
+  if (team1Score > team2Score) {
+    return team1;
+  }
+  if (team2Score > team1Score) {
+    return team2;
+  }
+  if (score.penalties) {
+    const team1Penalties = score.penalties[team1];
+    const team2Penalties = score.penalties[team2];
+
+    if (team1Penalties > team2Penalties) {
+      return team1;
+    }
+    if (team2Penalties > team1Penalties) {
+      return team2;
+    }
+  }
+};
+
+export { computerSelectTeam, createTeam, getMatchWinner };
