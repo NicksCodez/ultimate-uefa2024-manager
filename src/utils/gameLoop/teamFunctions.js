@@ -119,6 +119,7 @@ const createTeam = (teamFormation, teamName) => {
 
 const getMatchWinner = (matchResult) => {
   const { score } = matchResult;
+  console.log({ matchResult });
   const teamNames = Object.keys(score).filter((key) => key !== 'penalties');
 
   if (teamNames.length !== 2) {

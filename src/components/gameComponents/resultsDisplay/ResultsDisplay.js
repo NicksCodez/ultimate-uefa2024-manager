@@ -26,15 +26,39 @@ const ResultsDisplay = ({
   // computer games states
   const [computerGames, setComputerGames] = useState(null);
   const [winnerComputerTeams, setWinnerComputerTeams] = useState(null);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     console.log({ results });
     // calculate computer games while user is enthralled by the realer-than-life football experience you have created
+
     const computerMatchResults = simulateComputerGames(computerPairings);
-    setComputerGames({ computerMatchResults });
+    console.log('\n\n\n', { computerMatchResults }, '\n\n\n');
+    setComputerGames(computerMatchResults);
     const winningTeams = computerMatchResults.map((mr) => getMatchWinner(mr));
+    console.log('\n\n\n', { winningTeams }, '\n\n\n');
     setWinnerComputerTeams(winningTeams);
+    setLoaded(true);
+
+    console.log(
+      'in results display ',
+      { computerGames },
+      { winnerComputerTeams },
+      { results },
+      { playerTeamName },
+      { computerMatchResults },
+      { winningTeams },
+      { computerPairings },
+    );
   }, []);
+
+  useEffect(() => {
+    console.log(
+      'in results display --------------------- ',
+      { computerGames },
+      { winnerComputerTeams },
+    );
+  }, [computerGames, winnerComputerTeams]);
 
   return (
     <div id="results-display">
@@ -69,12 +93,12 @@ const ResultsDisplay = ({
         type="button"
         className="authentication-button"
         onClick={() =>
-          onContinue({
+          onContinue(
             computerGames,
             winnerComputerTeams,
             results,
             playerTeamName,
-          })
+          )
         }
       >
         Continue

@@ -200,16 +200,37 @@ const GameLoop = ({ gameId = null }) => {
             computerTeamName={gameState.computerTeam.name}
             computerPlayers={gameState.computerPlayers}
             computerPairings={gameState.computerPairings}
-            onContinue={(tournamentProgress) =>
-              advanceStage({ stage: 'tournament_progress', tournamentProgress })
+            onContinue={(
+              computerGames,
+              winnerComputerTeams,
+              results,
+              playerTeamName,
+            ) =>
+              advanceStage({
+                stage: 'tournament_progress',
+                computerGames,
+                winnerComputerTeams,
+                results,
+                playerTeamName,
+              })
             }
           />
         );
       case 'tournament_progress':
         return (
           <TournamentProgress
-            progress={gameState.tournamentProgress}
-            onContinue={() => advanceStage({ stage: 'player_selection' })}
+            computerGames={gameState.computerGames}
+            winnerComputerTeams={gameState.winnerComputerTeams}
+            results={gameState.results}
+            playerTeamName={gameState.playerTeamName}
+            userTeam={gameState.userTeam}
+            oldComputerTeams={gameState.computerTeams}
+            onContinue={(newComputerTeams) =>
+              advanceStage({
+                stage: 'player_selection',
+                computerTeams: newComputerTeams,
+              })
+            }
           />
         );
       default:
