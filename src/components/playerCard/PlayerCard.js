@@ -6,8 +6,16 @@ import { capitalizeFirstLetters } from '../../utils/stringFunctions/StringFuncti
 // css
 import './PlayerCard.css';
 
-const PlayerCard = ({ player }) => (
-  <div className="player-card">
+const PlayerCard = ({
+  player,
+  onPlayerClick = () => {},
+  showCursor = false,
+}) => (
+  <button
+    type="button"
+    className={`player-card ${showCursor ? 'cursor-pointer' : ''}`}
+    onClick={() => onPlayerClick(player)}
+  >
     <div className="player-card-left">
       <img src={player.picture} alt={player.name} />
     </div>
@@ -34,7 +42,7 @@ const PlayerCard = ({ player }) => (
         </div>
       </div>
     </div>
-  </div>
+  </button>
 );
 
 export default PlayerCard;

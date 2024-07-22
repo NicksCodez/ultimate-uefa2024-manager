@@ -47,7 +47,8 @@ const TeamList = ({ setSelectedTeam = () => null }) => {
     setPlayers(team.players);
     const playerListDiv = document.getElementById('player-list');
     playerListDiv.classList.add('active');
-    setSelectedTeam(team);
+    const unselectedTeams = teams.filter((t) => t.name !== team.name);
+    setSelectedTeam(unselectedTeams, team);
   };
 
   return (

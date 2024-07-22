@@ -1,0 +1,57 @@
+#player-selector {
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  flex-grow: 0;
+  height: calc(100% - 65px);
+}
+
+#player-selector,
+#player-selector-wrapper,
+#player-selector-background {
+  display: flex;
+  flex-direction: column;
+}
+
+#player-selector-wrapper {
+  padding: 1rem;
+  gap: 18px;
+}
+
+#player-selector .position-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+#player-selector .button-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+#player-selector .position-button {
+  border-radius: 9999px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#player-selector .player-image {
+  width: 60px;
+  height: 60px;
+  border-radius: 9999px;
+  object-fit: cover;
+}
+
+#player-selector .player-name,
+#player-selector .position-label {
+  font-size: 14px;
+  text-align: center;
+}
+
+#player-selector .player-name {
+  margin-top: -5px;
+}

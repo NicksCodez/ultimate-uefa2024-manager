@@ -1,6 +1,4 @@
 #player-list {
-  height: calc(100vh - 54px);
-  width: calc(100vw - 48px);
   position: absolute;
   top: 0px;
   left: 100%;
@@ -8,12 +6,29 @@
   background-color: var(--clr-bg-primary);
   transition: all 0.3s ease-in-out;
   padding: 0px 24px;
+  height: 100%;
+}
+
+#player-list li {
+  margin-top: 8px;
+  padding: 8px 12px;
+  background-color: var(--clr-bg-secondary);
+  border-radius: 6px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+#player-list li:hover {
+  background-color: var(--clr-bg-hover);
+  color: var(--clr-font-secondary);
 }
 
 #player-list.active {
   left: 0px;
+  right: 0px;
 }
 
 #player-list h3 {
   font-size: 24px;
+  text-align: left;
 }

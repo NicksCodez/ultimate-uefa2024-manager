@@ -16,13 +16,17 @@ import { useAuth } from '../../../contexts/authContext/AuthContext';
 // components
 import TeamSelection from '../teamSelection/TeamSelection';
 import PlayerSelection from '../playerSelection/PlayerSelection';
+import MatchSimulation from '../matchSimulation/MatchSimulation';
 
 // css
 import('./GameLoop.css');
 
 const GameLoop = ({ gameId = null }) => {
+  // component state
   const [gameState, setGameState] = useState(null);
   const [currentGameId, setCurrentGameId] = useState(gameId);
+
+  // auth
   const { currentUser } = useAuth();
 
   useEffect(() => {
@@ -129,22 +133,50 @@ const GameLoop = ({ gameId = null }) => {
       case 'team_selection':
         return (
           <TeamSelection
-            onSelect={(team) =>
-              advanceStage({ userTeam: team, stage: 'player_selection' })
-            }
+            onSelect={(computerTeams, team) => {
+              advanceStage({
+                userTeam: team,
+                stage: 'player_selection',
+                computerTeams,
+              });
+            }}
           />
         );
       case 'player_selection':
         return (
           <PlayerSelection
-            onSelect={(players) =>
-              advanceStage({ userPlayers: players, stage: 'match_simulation' })
+            onSelect={(
+              players,
+              computerPlayers,
+              computerPairings,
+              computerTeam,
+            ) =>
+              advanceStage({
+                userPlayers: players,
+                stage: 'match_simulation',
+                computerPlayers,
+                computerPairings,
+                computerTeam,
+              })
             }
+            onBack={() => advanceStage({ stage: 'team_selection' })}
             userTeam={gameState.userTeam}
+            computerTeams={gameState.computerTeams}
           />
         );
-      // case 'match_simulation':
-      //   return <MatchSimulation onComplete={(results) => advanceStage({ matchResults: results, stage: 'results' })} />;
+      case 'match_simulation':
+        return (
+          <MatchSimulation
+            onComplete={(results) =>
+              advanceStage({ matchResults: results, stage: 'results' })
+            }
+            playerTeamName={gameState.userTeam.name}
+            userPlayers={gameState.userPlayers}
+            computerTeamName={gameState.computerTeam.name}
+            computerPlayers={gameState.computerPlayers}
+            computerPairings={gameState.computerPairings}
+          />
+        );
       // case 'results':
       //   return <ResultsDisplay results={gameState.matchResults} onContinue={() => advanceStage({ stage: 'tournament_progress' })} />;
       // case 'tournament_progress':

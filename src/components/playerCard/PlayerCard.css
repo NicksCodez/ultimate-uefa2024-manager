@@ -1,5 +1,10 @@
-.player-card {
+button.player-card {
   display: flex;
+  cursor: default;
+}
+
+.player-card.cursor-pointer {
+  cursor: pointer;
 }
 
 .player-card .player-card-left {
@@ -16,13 +21,18 @@
   flex-grow: 1;
 }
 
-.player-card .player-card-right .player-name {
+.player-card .player-card-right .player-name,
+#player-list .player-card .player-card-right .player-name,
+button .player-card-right .player-name {
   font-size: 24px;
   border-bottom: 2px solid var(--clr-bg-primary);
   padding-left: 8px;
+  text-align: left;
 }
 
-.player-card .player-stats {
+.player-card .player-stats,
+#player-list .player-card .player-stats,
+button .player-card .player-stats {
   display: flex;
   gap: 8px;
   margin-top: 4px;
@@ -30,6 +40,8 @@
 }
 
 .player-card .category,
-.player-card .score {
+.player-card .score,
+button .player-card .category,
+button .player-card .score {
   font-size: 15px;
 }

@@ -8,7 +8,12 @@ import { capitalizeFirstLetters } from '../../utils/stringFunctions/StringFuncti
 
 import './PlayerList.css';
 
-const PlayerList = ({ players, firstPosition }) => {
+const PlayerList = ({
+  players,
+  firstPosition,
+  onPlayerClick = () => {},
+  showCursor = false,
+}) => {
   // sort players alphabetically without mutating original string
   const sortedPlayers = players
     .slice()
@@ -44,7 +49,11 @@ const PlayerList = ({ players, firstPosition }) => {
               <ul>
                 {groupedPlayers[position].map((player) => (
                   <li key={player.docId}>
-                    <PlayerCard player={player} />
+                    <PlayerCard
+                      player={player}
+                      onPlayerClick={onPlayerClick}
+                      showCursor={showCursor}
+                    />
                   </li>
                 ))}
               </ul>

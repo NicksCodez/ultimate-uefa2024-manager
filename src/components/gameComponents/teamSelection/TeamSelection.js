@@ -10,6 +10,7 @@ import './TeamSelection.css';
 
 const TeamSelection = ({ onSelect }) => {
   const [team, setTeam] = useState(null);
+  const [computerTeams, setComputerTeams] = useState(null);
   const [promptVisible, setPromptVisible] = useState(false);
 
   // PageHeader functions and components
@@ -18,7 +19,7 @@ const TeamSelection = ({ onSelect }) => {
       type="button"
       className="general-button confirm-button"
       disabled={team === null}
-      onClick={() => onSelect(team)}
+      onClick={() => onSelect(computerTeams, team)}
     >
       Confirm
     </button>
@@ -45,7 +46,12 @@ const TeamSelection = ({ onSelect }) => {
         onBackClick={onBackClick}
         rightElement={rightElement}
       />
-      <TeamList setSelectedTeam={(selectedTeam) => setTeam(selectedTeam)} />
+      <TeamList
+        setSelectedTeam={(unselectedTeams, selectedTeam) => {
+          setComputerTeams(unselectedTeams);
+          setTeam(selectedTeam);
+        }}
+      />
       <div
         id="prompt-quit-game"
         className={` ${promptVisible ? '' : 'fade-out'}`}
