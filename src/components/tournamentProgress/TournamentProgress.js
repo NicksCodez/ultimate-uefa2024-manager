@@ -20,7 +20,7 @@ const TournamentProgress = ({
   );
 
   useEffect(() => {
-    const roundWon = getMatchWinner(results) === playerTeamName;
+    const roundWon = getMatchWinner({ score: results }) === playerTeamName;
     const tournamentWon = !computerGames && roundWon;
     console.log(
       { roundWon },
