@@ -37,6 +37,10 @@ const ResultsDisplay = ({
     setComputerGames(computerMatchResults);
     const winningTeams = computerMatchResults.map((mr) => getMatchWinner(mr));
     console.log('\n\n\n', { winningTeams }, '\n\n\n');
+    // if player lost, add team player was fighting against to this
+    if (getMatchWinner({ score: results }) === computerTeamName) {
+      winningTeams.push(computerTeamName);
+    }
     setWinnerComputerTeams(winningTeams);
     setLoaded(true);
 
